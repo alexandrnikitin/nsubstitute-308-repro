@@ -18,18 +18,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             var sub = Substitute.ForPartsOf<Foo>();
-            sub.WhenForAnyArgs(async x =>
-            {
-                try
-                {
-                    await x.DoStuff(Arg.Any<string>());
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
-            }).DoNotCallBase();
-
+            sub.WhenForAnyArgs(async x => await x.DoStuff(Arg.Any<string>())).DoNotCallBase();
         }
     }
 }
